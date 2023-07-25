@@ -1,0 +1,195 @@
+{% load static %}
+{% load humanize %}
+
+<html>
+    <head>
+
+      <meta content="width=device-width, initial-scale=1, text/html" name="viewport" />
+
+      <title>{{station.station_name}}</title>
+              <!-- Favicon-->
+      <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+
+      <!-- FontAwsome -->
+      
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+      
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+      
+      <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> -->
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+      
+      <script type="text/javascript" src="{% static 'js/index.js' %}" ></script>
+      
+      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+      <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+       -->
+        <!-- <link rel="stylesheet" href="{% static 'css/reddit.css' %}"> -->
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/popper.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+
+        <!-- Begin Inspectlet Asynchronous Code -->
+        <script type="text/javascript">
+        (function() {
+        window.__insp = window.__insp || [];
+        __insp.push(['wid', 470560921]);
+        var ldinsp = function(){
+        if(typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js?wid=470560921&r=' + Math.floor(new Date().getTime()/3600000); var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
+        setTimeout(ldinsp, 0);
+        })();
+        </script>
+        <!-- End Inspectlet Asynchronous Code -->
+
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0ERELFD1B8"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-0ERELFD1B8');
+        </script>
+        
+      {% if not user.is_authenticated %}
+        {{ showpopup|json_script:"showpopup" }}
+      {% endif %}
+
+    </head>
+
+    <body>
+      {% include 'Reddit_app/common/navbar.html' %}
+
+      <div class="main-t-btn">
+          <button type="button" id="sidebarCollapse" class="btn btn-primary menu-tog-btn" onclick="changePostion()"></button>
+      </div>
+      <div class="m-inner-area">
+        <div class="container">
+          <div class="wrapper d-flex align-items-stretch" style="margin-bottom: 100px;">
+            {% include 'Reddit_app/sub_list.html' %}
+            <div id="content" class="mr-4">
+              <div class=" lt-area">
+                <div class="tr-inner">
+                  <form action="{% url 'subscribe' station.slug %}" method="POST" class="subscribe-form">
+                    {% csrf_token %}
+                    <div class="form-group d-flex mb-1">
+                      <div class="icon"><span class="icon-paper-plane"></span></div>
+                      <input type="email" name="email" class="form-control" placeholder="Subscribe us">
+                    </div>
+                      <button type="submit" class="btn sub-btn">Submit</button>
+                    
+                  </form>
+                </div>
+            </div>
+              {% block content %}
+              {% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <script>
+      
+        (function () {
+      "use strict";
+      var jQueryPlugin = (window.jQueryPlugin = function (ident, func) {
+        return function (arg) {
+          if (this.length > 1) {
+            this.each(function () {
+              var $this = $(this);
+    
+              if (!$this.data(ident)) {
+                $this.data(ident, func($this, arg));
+              }
+            });
+    
+            return this;
+          } else if (this.length === 1) {
+            if (!this.data(ident)) {
+              this.data(ident, func(this, arg));
+            }
+    
+            return this.data(ident);
+          }
+        };
+      });
+    })();
+    
+    (function () {
+      "use strict";
+      function Guantity($root) {
+        const element = $root;
+        const quantity = $root.first("data-quantity");
+        const quantity_target = $root.find("[data-quantity-target]");
+        const quantity_minus = $root.find("[data-quantity-minus]");
+        const quantity_plus = $root.find("[data-quantity-plus]");
+        var quantity_ = quantity_target.val();
+        $(quantity_minus).click(function () {
+          quantity_target.val(--quantity_);
+        });
+        $(quantity_plus).click(function () {
+          quantity_target.val(++quantity_);
+        });
+      }
+      $.fn.Guantity = jQueryPlugin("Guantity", Guantity);
+      $("[data-quantity]").Guantity();
+    })();
+    
+      $('.panel-collapse').on('show.bs.collapse', function () {
+        $(this).siblings('.panel-heading').addClass('active');
+      });
+    
+      $('.panel-collapse').on('hide.bs.collapse', function () {
+        $(this).siblings('.panel-heading').removeClass('active');
+      });
+    
+        // function changePostion() {
+        //   let active_exists = $('#sidebar').hasClass('active'); 
+			
+        //   if ( !active_exists ) {
+        //     $('#sidebar').addClass('active');
+        //     console.log('comi')
+        //     $('.main-t-btn').css('top','-63px');
+        //   } else {
+        //     //$('#sidebar').removeClass('active');
+        //     $('.main-t-btn').css('top','13px');
+        //   }
+        // }
+
+        
+        function changePostion() {
+          console.log('com');
+          
+          console.log('order');
+          //     if($(window).width() <= 767)
+          // {
+            let active_exists = $('#sidebar.active').hasClass('active'); 
+            
+            if ( !active_exists ) {
+              $('#sidebar').addClass('active');
+              //console.log('comi')
+              //$('.main-t-btn').css('top','-63px');
+              // $('body,html').css('background','#000');
+            } else {
+              $('#sidebar').removeClass('active');
+              //$('.main-t-btn').css('top','13px');
+              // $('body,html').css('background','#e5e5e5');
+            }
+          // }
+        }
+
+
+      </script>
+      {% include 'Reddit_app/common/footer.html' %}
+  </body>
+</html>
+
+

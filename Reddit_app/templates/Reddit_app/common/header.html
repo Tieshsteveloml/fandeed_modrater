@@ -1,0 +1,80 @@
+{% load static %}
+{% load humanize %}
+
+<html>
+    <head>
+
+        <meta content="width=device-width, initial-scale=1, text/html" name="viewport" />
+
+        <title>{{station.station_name}}</title>
+        	  <!-- Favicon-->
+	  <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+
+	  <!-- FontAwsome -->
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+        <!-- <link rel="stylesheet" href="{% static 'css/reddit.css' %}"> -->
+        <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <!-- <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/popper.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script> -->
+
+        <!-- Begin Inspectlet Asynchronous Code -->
+        <script type="text/javascript">
+        (function() {
+        window.__insp = window.__insp || [];
+        __insp.push(['wid', 470560921]);
+        var ldinsp = function(){
+        if(typeof window.__inspld != "undefined") return; window.__inspld = 1; var insp = document.createElement('script'); insp.type = 'text/javascript'; insp.async = true; insp.id = "inspsync"; insp.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cdn.inspectlet.com/inspectlet.js?wid=470560921&r=' + Math.floor(new Date().getTime()/3600000); var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(insp, x); };
+        setTimeout(ldinsp, 0);
+        })();
+        </script>
+        <!-- End Inspectlet Asynchronous Code -->
+
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0ERELFD1B8"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-0ERELFD1B8');
+        </script>
+
+        <!-- Global site tag (gtag.js) - Google Ads: 10805240710 -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10805240710"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'AW-10805240710');
+        </script>
+
+        {{ showpopup|json_script:"showpopup" }}
+      <!--  {% if not user.is_authenticated %}-->
+        <script type="text/javascript" src="{% static 'js/index.js' %}" ></script>
+        <!--  {% endif %}-->
+        <!-- Event snippet for Website traffic conversion page -->
+        <script>
+          gtag('event', 'conversion', {'send_to': 'AW-10805240710/90TvCNDZvoIDEIbHq6Ao'});
+        </script>
+
+    </head>
+
+    <body>
+      {% include 'Reddit_app/common/navbar.html' %}
+      {% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+			<li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			{% endfor %}
+		</ul>
+	  {% endif %}
+    </body>

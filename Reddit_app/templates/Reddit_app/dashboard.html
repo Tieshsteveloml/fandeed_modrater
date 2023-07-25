@@ -1,0 +1,17 @@
+{% extends "Reddit_app/station_base.html" %}
+{%load plotly_dash%}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="register n-page">
+    <div class="container">
+        <div class="np-inner">
+            {%load plotly_dash%}
+            <div class="{% plotly_class name="dash_container"%}">
+            {%plotly_app name="dash_container" ratio=1 %}
+            </div>
+        </div>  
+    </div>  
+</div>
+{% endblock %}

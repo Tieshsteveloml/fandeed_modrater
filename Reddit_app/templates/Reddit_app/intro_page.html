@@ -1,0 +1,24 @@
+{% extends "Reddit_app/station_base.html" %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+    <div class="">
+        <div class="content-container introo">
+            <div class="intro-column" id="your_station"><a href="{% url 'station_list' %}">Your Station</a></div>
+            <div class="intro-column" id="create_station"><a href="{% url 'builder_verification' %}">Create a new station
+            (not available)</a></div>
+
+        </div>
+    </div>
+
+    <div class="page-footer">
+        <div class="container">
+            <div class="navbar-foter" style="text-align: center; padding-top: 15px;">
+                <div class="navbar-text"><h6><a href="/privacy_terms/">Privacy &amp; Terms</a></h6></div>
+                <div class="navbar-text pl-4"><h6><a href="mailto: team@fandeed.com">Contact</a></h6></div>
+            </div>
+        </div> 
+    </div> 
+{% endblock %}

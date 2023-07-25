@@ -1,0 +1,172 @@
+{% load static %}
+
+<header>
+    <div class="nav-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg w-100">  
+                <div class="row w-100">
+
+                    <!------------------- logo area ------------------->
+                    <div class="col-xl-3 col-md-3 col-sm-12 col-12 log-div">
+                        <a class="nav-brand" href="#">
+                            {% if station %}
+                                <div class="logo">
+                                    <p>
+                                        <a class="logo-atag" href="{% url 'post_list' slug=station.slug %}" id="base-title-content">{{station.station_name}}
+                                            
+                                        </a>
+                                    </p>                  
+                                    <p class="logo-tag">
+                                        {{station.text}}
+                                    </p>
+                                </div>
+                            {% else %}
+                                <div class="mp-logo">
+                                    <a href="/">
+                                        <h2 class="logo-m">Fandeed</h2>
+                                    </a>
+                                </div>
+                            {% endif %} 
+                        </a>  
+                    </div>
+                    <!------------------- logo area ------------------->
+
+
+    
+                    <button class="navbar-toggler mob-hbtn" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon">
+                            <i class="fa fa-bars"></i>
+                        </span>
+                    </button>
+
+                    <!------------------- menu Area ------------------->
+                    <div class="col-xl-9 col-md-9 col-sm-12 col-12 tm-right">
+                        <ul class="t-main-ul">
+                            <li>
+                                <ul class="auth-div" style="display: flex;">
+                                    {% if station %}
+                                    <li>
+                                        <div class="tl-inner ">
+                                            <a type="button" href="{% url 'post_new' slug=station.slug %}" class="btn t-btn"> Ask a Question</a>
+                                        </div>
+                                    </li>
+        
+                                    {% if station.creator == request.user %}
+                                        <li>
+                                            <div class="tl-inner ">
+                                                <a type="button" href="{% url 'invite_user' slug=station.slug %}" class="btn btn-secondary q-btn">Invite</a>
+                                            </div>
+                                        </li>
+                                        
+                                    {% endif %}
+        
+                                {% endif %}
+                                </ul>
+                            </li>
+
+                            <li>
+                                
+                                  <div class="collapse navbar-collapse w-100" id="navbarSupportedContent">
+                                    {% if user.is_authenticated %}
+                                    <div class="w-100">
+                                      <div class="tl-side w-100">
+                                        <ul class="mobo-menu">
+                                            <li class="mobo-profil">
+                                            {% if station %}
+                                            <a href="{% url 'user_detail' slug=station.slug user_slug=inviteduser.user_slug %}">{{ user.username }}</a>
+                                            {% else %}
+                                                <a href="#">{{ user.username }}</a>
+                                            {% endif %}
+                                            </li>
+                                            <li class="pr-2 first-child m-list">
+                                                {% if station %}
+                                                    <a href="{% url 'member_list' slug=station.slug %}">Members</a>
+                                                {% endif %}
+            
+                                            </li>
+                                            <li class="pr-2 web-user">
+                                            {% if station %}
+                                                <a href="{% url 'user_detail' slug=station.slug user_slug=inviteduser.user_slug %}">{{ user.username }}</a>
+                                            {% else %}
+                                                <a href="#">{{ user.username }}</a>
+                                            {% endif %}
+                                            </li>
+                                            <li class="pr-4 m-list">
+                                            <a href="{% url 'logout' %}?next={{request.path}}">
+                                                Logout
+                                            </a>
+                                            </li>
+                                        </ul>
+                                     </div>
+                                </div>
+                                {% else %}
+                                <div class="no-auth">
+                                        <ul class="signIn-div">
+                                            <li class="pr-2 m-list">
+                                                <img class="h-img" src="{% static 'images/login.png' %}">
+                                            </li>
+                                            <li class="m-list signin-link tl-side">
+                                                <a href="{% url 'login' %}?next={{request.path}}">
+                                                    Sign In
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                                              
+                                {% endif %}
+                                </div>
+                            </li>
+                               
+                                                  
+                        </ul>
+                    </div>
+                    <!------------------- menu Area ------------------->
+                </div>
+              </nav>
+        </div>
+    </div>
+    
+    <script>
+        $(window).scroll(function() {    
+            var scroll = $(window).scrollTop();;
+
+            //>=, not <=
+            if (scroll >= 50) {
+                //clearHeader, not clearheader - caps H
+                $(".navbar-toggler").removeClass("mob-hbtn");
+            }
+            else{
+                $(".navbar-toggler").addClass("mob-hbtn");
+            } 
+
+        }); 
+    </script>
+    <script>
+		$('.mob-hbtn').on('click', function() {
+            let check_show = $('#navbarSupportedContent').hasClass("show");
+        	console.log('chk show',check_show);
+        	if (check_show) {
+            	console.log('if');
+            	if ($('#navbarSupportedContent').css('display') == 'none')
+            	{
+                	console.log('if if');
+                	$('#navbarSupportedContent').removeClass('show');
+            	}
+            	else {
+                	console.log('if else');
+                	$('#navbarSupportedContent').hide();
+            	}
+            	$('#navbarSupportedContent').hide();
+            }
+        	else {
+            	console.log('else');
+            	$('#navbarSupportedContent').show();
+            }
+        	
+        	
+        })
+
+    </script>
+    
+    
+</header>

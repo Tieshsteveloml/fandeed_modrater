@@ -1,0 +1,42 @@
+{
+    "tokenfile": "./discord/module/sample.token.txt",
+    "useragent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) discord/0.0.309 Chrome/83.0.4103.122 Electron/9.3.5 Safari/537.36",
+    "buffer": 1048576,
+
+    "options": {
+        "validateFileHeaders": false,
+        "generateFileChecksums": false,
+        "sanitizeFileNames": true,
+        "compressImageData": false,
+        "compressTextData": false,
+        "gatherJSONData": true
+    },
+
+    "query": {
+        "images": false,
+        "files": false,
+        "embeds": false,
+        "links": false,
+        "videos": false,
+        "nsfw": true
+    },
+
+    "types": {
+        "images": true,
+        "videos": true,
+        "files": true,
+        "text": true
+    },
+
+    "directs": {
+        "anything you want to name it will become the folder name that stores the files": "direct message channel id",
+        "this will come in handy whenever this branch has DM scraping implemented, right now that's on the backburner of bugfixing and feature implementation.": "another direct message channel id"
+    },
+    
+    "guilds": {
+        "838099086573305879": [
+            "838099087068626978","852767377933598770","840043946738581524",
+            "839288385990688788", "840044035297116182", "840044179848429614", "839921748971225108"
+        ]
+    }
+}
